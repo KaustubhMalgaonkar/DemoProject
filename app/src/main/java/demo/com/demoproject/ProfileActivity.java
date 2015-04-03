@@ -1,5 +1,6 @@
 package demo.com.demoproject;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class ProfileActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
+public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
   EditText etName,etEmail,etNumber;
   Spinner spCity;
@@ -24,6 +25,7 @@ public class ProfileActivity extends ActionBarActivity implements View.OnClickLi
   Button btnSubmit;
   String gender;
   String city[] = {"Mumbai","Surat","Navi Mumbai","Pune","Thane"};
+  private String selectedCity;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,14 @@ public class ProfileActivity extends ActionBarActivity implements View.OnClickLi
     return super.onOptionsItemSelected(item);
   }
 
-  @Override
+  /*@Override
   public void onClick(View v) {
     switch (v.getId()){
       case R.id.btnSubmit:
-        Toast.makeText(getApplicationContext(),gender,Toast.LENGTH_LONG).show();
+
         break;
     }
-  }
+  }*/
 
   @Override
   public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -96,11 +98,29 @@ public class ProfileActivity extends ActionBarActivity implements View.OnClickLi
 
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-    Toast.makeText(getApplicationContext(),city[position],Toast.LENGTH_LONG).show();
+    selectedCity = parent.getSelectedItem().toString();
   }
 
   @Override
   public void onNothingSelected(AdapterView<?> parent) {
 
+  }
+
+  @Override
+  public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.btnSubmit:
+        Intent intent = new Intent(getApplicationContext(),ProfileDetailActivity.class);
+        intent.putExtra("name",etName.getText().toString());
+        intent.putExtra("email",etEmail.getText().toString());
+        intent.putExtra("number",etNumber.getText().toString());
+        intent.putExtra("gender",gender);
+        intent.putExtra("city",selectedCity);
+        startActivity(intent);
+        break;
+
+      default:
+        break;
+    }
   }
 }
