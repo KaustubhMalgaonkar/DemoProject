@@ -9,9 +9,16 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import demo.com.demoproject.database.ProfileModel;
+
 
 public class ProfileDetailActivity extends ActionBarActivity {
+
   TextView txt;
+  ArrayList<ProfileModel> profileModelArrayList;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -19,11 +26,13 @@ public class ProfileDetailActivity extends ActionBarActivity {
 
     txt = (TextView) findViewById(R.id.txt);
 
-    Bundle b = getIntent().getExtras();
+    profileModelArrayList = new ArrayList<ProfileModel>();
+    profileModelArrayList = ProfileModel.getInstance().getProfileList(getApplicationContext(),0);
 
-    if(b != null){
-//      Log.e("profile detail",b.getString("name")+" "+b.getString("email")+" "+b.getString("number")+" "+b.getString("gender")+" "+b.getString("city"));
-      txt.setText("profile detail:"+b.getString("name")+" "+b.getString("email")+" "+b.getString("number")+" "+b.getString("gender")+" "+b.getString("city"));
+    if(profileModelArrayList.size() != 0){
+      for (ProfileModel profile : profileModelArrayList){
+        Log.e("Name",profile.getName());
+      }
     }
 
   }

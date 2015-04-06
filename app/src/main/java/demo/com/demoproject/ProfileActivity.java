@@ -15,6 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import demo.com.demoproject.database.ProfileModel;
+
 
 public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -31,6 +33,8 @@ public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnC
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_profile);
+
+
 
     etName = (EditText) findViewById(R.id.etName);
     etEmail = (EditText) findViewById(R.id.etEmail);
@@ -110,12 +114,16 @@ public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnC
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.btnSubmit:
+
+        ProfileModel.getInstance().addDistList(getApplicationContext(),new ProfileModel(
+            etName.getText().toString(),
+            etEmail.getText().toString(),
+            Long.parseLong(etNumber.getText().toString()),
+            gender,
+            selectedCity
+        ));
+
         Intent intent = new Intent(getApplicationContext(),ProfileDetailActivity.class);
-        intent.putExtra("name",etName.getText().toString());
-        intent.putExtra("email",etEmail.getText().toString());
-        intent.putExtra("number",etNumber.getText().toString());
-        intent.putExtra("gender",gender);
-        intent.putExtra("city",selectedCity);
         startActivity(intent);
         break;
 
