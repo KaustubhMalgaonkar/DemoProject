@@ -1,30 +1,25 @@
-package demo.com.demoproject;
+package demo.com.demoproject.CustomList;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import demo.com.demoproject.R;
 import demo.com.demoproject.database.ProfileModel;
 
 
-public class ProfileDetailActivity extends ActionBarActivity{
-
+public class ProfileCustomActivity extends ActionBarActivity {
 
   ListView listView;
   ArrayList<ProfileModel> profileModelArrayList;
-  String name [];
+  ProfileAdapter profileAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +28,30 @@ public class ProfileDetailActivity extends ActionBarActivity{
 
     listView = (ListView) findViewById(R.id.profileListView);
 
+    /*get user details from database*/
     profileModelArrayList = new ArrayList<ProfileModel>();
     profileModelArrayList = ProfileModel.getInstance().getProfileList(getApplicationContext(),0);
 
-    name = new String[profileModelArrayList.size()];
-    if(profileModelArrayList.size() != 0){
-      /*for (ProfileModel profile : profileModelArrayList){
-        Log.e("Name",profile.getName());
-      }*/
-      for(int i = 0 ; i < profileModelArrayList.size() ; i++){
-        name[i] = profileModelArrayList.get(i).getName();
-      }
-    }
 
-    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,name);
-    listView.setAdapter(arrayAdapter);
+    /*create custom adapter for profile detail view*/
+    profileAdapter = new ProfileAdapter(this,R.layout.custom_profile_details,profileModelArrayList);
+
+    listView.setAdapter(profileAdapter);
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(),name[position],Toast.LENGTH_LONG).show();
+        ProfileModel profileModel = profileAdapter.getItem(position);
+        Toast.makeText(ProfileCustomActivity.this,profileModel.getName(),Toast.LENGTH_LONG).show();
       }
     });
+
   }
 
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_profile_detail, menu);
+    getMenuInflater().inflate(R.menu.menu_profile_custom, menu);
     return true;
   }
 
@@ -78,5 +69,4 @@ public class ProfileDetailActivity extends ActionBarActivity{
 
     return super.onOptionsItemSelected(item);
   }
-
 }

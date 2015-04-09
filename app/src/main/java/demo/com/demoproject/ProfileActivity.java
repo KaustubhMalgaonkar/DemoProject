@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import demo.com.demoproject.CustomList.ProfileCustomActivity;
 import demo.com.demoproject.database.ProfileModel;
 
 
@@ -73,6 +74,8 @@ public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnC
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
+      Intent intent = new Intent(getApplicationContext(),ProfileCustomActivity.class);
+      startActivity(intent);
       return true;
     }
 

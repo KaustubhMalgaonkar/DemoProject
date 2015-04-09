@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.com.demoproject" >
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +29,10 @@
         <activity
             android:name=".ProfileDetailActivity"
             android:label="@string/title_activity_profile_detail" >
+        </activity>
+        <activity
+            android:name=".CustomList.ProfileCustomActivity"
+            android:label="@string/title_activity_profile_custom" >
         </activity>
     </application>
 

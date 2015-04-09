@@ -138,7 +138,7 @@ public class ProfileModel {
     Cursor cursor;
     if(profileId == 0) {
       cursor = db.rawQuery("select * from " + databaseHelper.TABLE_PROFILE + " ORDER BY " + databaseHelper.KEY_CREATED + " DESC", null);
-    }else {
+    } else {
       cursor = db.query(databaseHelper.TABLE_PROFILE, new String[]{databaseHelper.KEY_ID,databaseHelper.KEY_NAME,
               databaseHelper.KEY_EMAIL, databaseHelper.KEY_NUMBER, databaseHelper.KEY_GENDER, databaseHelper.KEY_CITY,
               databaseHelper.KEY_CREATED}, databaseHelper.KEY_ID + "=?",
