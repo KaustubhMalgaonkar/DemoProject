@@ -118,7 +118,7 @@ public class ProfileActivity extends ActionBarActivity implements RadioGroup.OnC
     switch (v.getId()) {
       case R.id.btnSubmit:
 
-        ProfileModel.getInstance().addDistList(getApplicationContext(),new ProfileModel(
+        ProfileModel.getInstance().addProfile(getApplicationContext(),new ProfileModel(
             etName.getText().toString(),
             etEmail.getText().toString(),
             Long.parseLong(etNumber.getText().toString()),

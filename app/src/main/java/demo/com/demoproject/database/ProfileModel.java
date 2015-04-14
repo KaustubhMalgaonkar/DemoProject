@@ -112,7 +112,7 @@ public class ProfileModel {
     this.created = created;
   }
 
-  public long addDistList(Context context, ProfileModel profileModel){
+  public long addProfile(Context context, ProfileModel profileModel){
     DatabaseHelper databaseHelper = new DatabaseHelper(context);
     db = databaseHelper.open();
 

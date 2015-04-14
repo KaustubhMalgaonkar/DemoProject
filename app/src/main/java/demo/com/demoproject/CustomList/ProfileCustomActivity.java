@@ -44,7 +44,6 @@ public class ProfileCustomActivity extends ActionBarActivity {
         Toast.makeText(ProfileCustomActivity.this,profileModel.getName(),Toast.LENGTH_LONG).show();
       }
     });
-
   }
 
 

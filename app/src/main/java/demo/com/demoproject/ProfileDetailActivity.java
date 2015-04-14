@@ -38,12 +38,13 @@ public class ProfileDetailActivity extends ActionBarActivity{
 
     name = new String[profileModelArrayList.size()];
     if(profileModelArrayList.size() != 0){
-      /*for (ProfileModel profile : profileModelArrayList){
-        Log.e("Name",profile.getName());
-      }*/
-      for(int i = 0 ; i < profileModelArrayList.size() ; i++){
-        name[i] = profileModelArrayList.get(i).getName();
+      for (ProfileModel profile : profileModelArrayList){
+//        Log.e("Name",profile.getName());
+        name[profileModelArrayList.indexOf(profile)] = profile.getName();
       }
+      /*for(int i = 0 ; i < profileModelArrayList.size() ; i++){
+        name[i] = profileModelArrayList.get(i).getName();
+      }*/
     }
 
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,name);

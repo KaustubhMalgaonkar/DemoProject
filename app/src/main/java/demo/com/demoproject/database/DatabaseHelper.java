@@ -22,13 +22,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   //Column Names
   public static final String KEY_ID = "id";
   public static final String KEY_CREATED = "created";
-
   public static final String KEY_NAME = "name";
   public static final String KEY_EMAIL = "email";
   public static final String KEY_NUMBER = "number";
   public static final String KEY_GENDER = "gender";
   public static final String KEY_CITY = "city";
-
 
   public DatabaseHelper(Context context){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
